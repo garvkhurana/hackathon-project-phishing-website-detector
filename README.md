@@ -60,10 +60,10 @@ Contact
 For any inquiries or feedback regarding this project, feel free to contact:
 
 
-jayant bisht-jk913600@gmail.com
+jayant bisht- jk913600@gmail.com
 
-hardik mudgal-hardik.mudgal79@gmail.com
+hardik mudgal- hardik.mudgal79@gmail.com
 
-kartik -kartikbodhkar@gmail.com
+kartik- kartikbodhkar@gmail.com
 
-garv khurana-garvkhurana1234567@gmail.com
+garv khurana- garvkhurana1234567@gmail.com
