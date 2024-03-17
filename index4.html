@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing Website Detection</title>
+    <form action="{{ url_for('predict')}}" method="post"></form>
+
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.3/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .grid{
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        }
+        .box{
+            width: 212px;
+            height: 120px;
+        }
+    </style>
+</head>
+
+<body class="bg-yellow-100 p-4">
+    <form action="{{ url_for('predict')}}" method="post">
+
+        <b>
+            <center>
+                <h1>phishing website predictor</h1>
+            </center>
+        </b>
+
+        <div class="bg-white p-4 shadow-md mb-4 rounded grid">
+
+
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p> having_ip_address:</p>
+                <label><input type="radio" name="having_ip_address" value="1"> Yes</label><br>
+                <label><input type="radio" name="having_ip_address" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p> url_length:</p>
+                <label><input type="radio" name="url_length" value="1">
+                    < 54 characters</label><br>
+                        <label><input type="radio" name="url_length" value="0"> 54-72 characters </label><br>
+                        <label><input type="radio" name="url_length" value="-1"> > 72 characters</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>shortining_service:</p>
+                <label><input type="radio" name="shortining_service" value="1"> Yes</label><br>
+                <label><input type="radio" name="shortining_service" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p> having_at_symbol:</p>
+                <label><input type="radio" name="having_at_symbol" value="1"> Yes</label><br>
+                <label><input type="radio" name="having_at_symbol" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>double_slash_redirecting:</p>
+                <label><input type="radio" name="double_slash_redirecting" value="1"> Yes</label><br>
+                <label><input type="radio" name="double_slash_redirecting" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>prefix_suffix:</p>
+                <label><input type="radio" name="prefix_suffix" value="1"> Yes</label><br>
+                <label><input type="radio" name="prefix_suffix" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p> having_sub_domain:</p>
+                <label><input type="radio" name="having_sub_domain" value="0"> no</label><br>
+                <label><input type="radio" name="having_sub_domain" value="1"> yes</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p> sslfinal_state:</p>
+                <label><input type="radio" name="sslfinal_state" value="1"> presence of ssl</label><br>
+                <label><input type="radio" name="sslfinal_state" value="0"> missing data</label> <br>
+                <label><input type="radio" name="sslfinal_state" value="-1"> absence of ssl </label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>domain_registration_length:</p>
+                <label><input type="radio" name="domain_registration_length" value="1"> Yes</label><br>
+                <label><input type="radio" name="domain_registration_length" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>favicon:</p>
+                <label><input type="radio" name="favicon" value="1"> Yes</label><br>
+                <label><input type="radio" name="favicon" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>port:</p>
+                <label><input type="radio" name="port" value="1"> Yes</label><br>
+                <label><input type="radio" name="port" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p> https_token:</p>
+                <label><input type="radio" name="https_token" value="1"> yes</label><br>
+                <label><input type="radio" name="https_token" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>request_url:</p>
+                <label><input type="radio" name="request_url" value="1"> yes</label><br>
+                <label><input type="radio" name="request_url" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>url_of_anchor:</p>
+                <label><input type="radio" name="url_of_anchor" value="1"> present</label><br>
+                <label><input type="radio" name="url_of_anchor" value="0"> missing</label><br>
+                <label><input type="radio" name="url_of_anchor" value="-1"> absent</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>links_in_tags:</p>
+                <label><input type="radio" name="links_in_tags" value="1"> less than 5</label><br>
+                <label><input type="radio" name="links_in_tags" value="0"> 5-7</label><br>
+                <label><input type="radio" name="links_in_tags" value="-1"> more than 7</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>sfh:</p>
+                <label><input type="radio" name="sfh" value="1"> non empty</label><br>
+                <label><input type="radio" name="sfh" value="0"> empty </label><br>
+                <label><input type="radio" name="sfh" value="-1"> undefine</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>submitting_to_email:</p>
+                <label><input type="radio" name="submitting_to_email" value="1"> yes</label><br>
+                <label><input type="radio" name="submitting_to_email" value="0"> no</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>abnormal_url:</p>
+                <label><input type="radio" name="abnormal_url" value="1"> yes</label><br>
+                <label><input type="radio" name="abnormal_url" value="0"> no</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>redirect:</p>
+                <label><input type="radio" name="redirect" value="1"> yes</label><br>
+                <label><input type="radio" name="redirect" value="0"> no</label><br>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>on_mouseover:</p>
+                <label><input type="radio" name="on_mouseover" value="1"> yes</label><br>
+                <label><input type="radio" name="on_mouseover" value="0"> no</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>rightclick:</p>
+                <label><input type="radio" name="rightclick" value="1"> yes</label><br>
+                <label><input type="radio" name="rightclick" value="0"> no</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>popupwindow:</p>
+                <label><input type="radio" name="popupwindow" value="1"> Yes</label><br>
+                <label><input type="radio" name="popupwindow" value="0"> No</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>iframe:</p>
+                <label><input type="radio" name="iframe" value="1"> yes</label><br>
+                <label><input type="radio" name="iframe" value="0"> no</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>age_of_domain:</p>
+                <label><input type="radio" name="age_of_domain" value="1"> more than 2 years</label><br>
+                <label><input type="radio" name="age_of_domain" value="0"> 1-2 years</label><br>
+                <label><input type="radio" name="age_of_domain" value="-1"> less than 1 years</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>dnsrecord:</p>
+                <label><input type="radio" name="dnsrecord" value="1"> yes</label><br>
+                <label><input type="radio" name="dnsrecord" value="0"> no</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>web_traffic:</p>
+                <label><input type="radio" name="web_traffic" value="1"> High</label><br>
+                <label><input type="radio" name="web_traffic" value="0"> Medium</label><br>
+                <label><input type="radio" name="web_traffic" value="-1"> Low</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>page_rank:</p>
+                <label><input type="radio" name="page_rank" value="1"> yes</label><br>
+                <label><input type="radio" name="page_rank" value="0"> no</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>google_index:</p>
+                <label><input type="radio" name="google_index" value="1"> indexed by google</label><br>
+                <label><input type="radio" name="google_index" value="0"> missing data </label><br>
+                <label><input type="radio" name="google_index" value="-1"> not indexed by google</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>links_pointing_to_page:</p>
+                <label><input type="radio" name="links_pointing_to_page" value="1"> atleast 1 external link</label><br>
+                <label><input type="radio" name="links_pointing_to_page" value="0">missing value</label><br>
+                <label><input type="radio" name="links_pointing_to_page" value="-1">  no external link</label>
+            </div>
+            <div class="bg-white p-4 shadow-md mb-4 rounded box">
+                <p>statistical_report:</p>
+                <label><input type="radio" name="statistical_report" value="1"> yes</label><br>
+                <label><input type="radio" name="statistical_report" value="0"> no</label>
+            </div>
+
+            <div class="flex justify-center mt-4">
+                <center><button type="submit"
+                    class="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline hover:bg-blue-700">
+                    Submit</button></center>
+    </form>
+    <br><br>
+<center><h1> {{ result }}<h1></center>
+
+            </div>
+
+            </style>
+
+</body>
+
+</html>
